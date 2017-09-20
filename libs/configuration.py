@@ -106,8 +106,8 @@ def configuration_parser(config_file):
     from utils import calculate_channel, md5, getmac
     channel = calculate_channel()
     uuid = md5(getmac(intfmon))[7:14]
-    repeater = config["general"]["repeater"]
-    pcount = config["general"]["pcount"]
+    repeater = int(config["general"]["repeater"])
+    pcount = int(config["general"]["pcount"])
     return config
 
 
