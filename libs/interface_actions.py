@@ -211,7 +211,7 @@ def PacketSend(encrypted,payload):
         ds="\x01"
         rates="x98\x24\xb0\x48\x60\x6c"
         # Forge Dot11packet
-        dot11 = Dot11(type=0,subtype=4,addr1=broadcast, addr2=RandMAC(),addr3=remote)
+        dot11 = Dot11(type=0,subtype=4,addr1=broadcast, addr2=RandMAC(),addr3=':'.join(remote).upper())
         eltessid = Dot11Elt(ID=0,len=0,info='')
         eltrates = Dot11Elt(ID=1,len=len(rates),info=rates)
         eltchannel = Dot11Elt(ID=3,len=1,info=chr(channel))
