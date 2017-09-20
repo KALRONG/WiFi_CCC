@@ -49,7 +49,7 @@ def InitMon(interface):
 def packetSniffer():
     from configuration import intfmon
     try:
-        sniff(iface=str(intfmon), prn=PacketHandler, store=False, lfilter=lambda pkt: (Dot11ProbeReq in pkt))
+        sniff(iface=intfmon, prn=PacketHandler, store=False, lfilter=lambda pkt: (Dot11ProbeReq in pkt))
     except Exception as e:
         logger.error("Error starting sniffer!")
         print "Error starting sniffer! %s" % e.message
