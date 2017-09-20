@@ -32,4 +32,4 @@ def remove_padding(message):
             i -= 1
         else:
             break
-    return message[:i]
+    return message[:i+1]
