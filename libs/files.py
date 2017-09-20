@@ -13,7 +13,6 @@ def filecrypt(filename, chunksize):
     try:
         from configuration import cipher
         parts = textwrap.wrap(fileContent, chunksize, break_on_hyphens=False)
-        print len(parts)
         encoded_parts=set()
         for part in parts:
             lastpadd = len(part) % 16
@@ -21,6 +20,7 @@ def filecrypt(filename, chunksize):
             part = part + ("~" * (16 - lastpadd))
             encoded_part = base64.b64encode(cipher.encrypt(part))
             encoded_parts.add(encoded_part)
+        print len(encoded_parts)
         return encoded_parts
     except Exception as e:
         print ":chat: error disecting file: %s. %s" %(filename, e.message)
