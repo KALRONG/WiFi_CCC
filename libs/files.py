@@ -13,7 +13,7 @@ def filecrypt(filename, chunksize):
         return ''
     try:
         from configuration import cipher
-        parts = textwrap.wrap(fileContent, chunksize)
+        parts = textwrap.wrap(fileContent, chunksize, break_on_hyphens=False)
         encoded_parts=set()
         for part in parts:
             lastpadd = len(part) % 16
