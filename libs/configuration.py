@@ -80,10 +80,13 @@ def configuration_parser(config_file):
         nick_selection()
     else:
         print "Using nickname: %s" % config["general"]["username"]
+        username = config["general"]["username"]
     if not config.has_option("general", "channel"):
-        channel_selection()
+        privateirc = channel_selection()
     else:
         print "Using chat room: %s" % config["general"]["channel"]
+        privateircname = config["general"]["channel"]
+        privateirc = (config["general"]["channel"] * ((16 / len(config["general"]["channel"])) + 1))[:16]
     repeater = config["general"]["repeater"]
     pcount = config["general"]["pcount"]
     return config
