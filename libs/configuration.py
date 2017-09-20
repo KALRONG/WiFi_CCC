@@ -90,5 +90,18 @@ def configuration_parser(config_file):
 
 def init_config():
     global conf
+    global maxpayload
+    global sc
+    global lastpacketsc
+    global userlist
+    global bootime
+    global pktcount
+    global pktcounts
+    global pktcountw
+    global pktcountpb
+    global pktcountpbd
+    global pingcount
+    global pingsc
+    global broadcast
     log.init_logging()
     conf = configuration_parser(argument_parser().config)
