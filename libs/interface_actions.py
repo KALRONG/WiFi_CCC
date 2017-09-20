@@ -209,7 +209,7 @@ def PacketSend(encrypted,payload):
         payload=part
         ds="\x01"
         rates="x98\x24\xb0\x48\x60\x6c"
-
+        print "algo %s" % channel
         # Forge Dot11packet
         dot11 = Dot11(type=0,subtype=4,addr1=broadcast, addr2=RandMAC(),addr3=remote)
         eltessid = Dot11Elt(ID=0,len=0,info='')
