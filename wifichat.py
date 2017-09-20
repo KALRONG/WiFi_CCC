@@ -9,7 +9,6 @@ from libs.configuration import init_config
 
 def main():
     init_config()
-    from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
     from libs.utils import banner, utilization, cleanexit, channel_password
     from libs.configuration import username, privateircname, channel, conf
     banner()
@@ -23,6 +22,7 @@ def main():
             pass
     # Cipher suite: never use ECB in other place than a PoC
     cipher = AES.new(channel_password(), AES.MODE_ECB)
+    from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
     SetChannel(channel)
     sniffer = Thread(target=packetSniffer)
     sniffer.daemon = True
