@@ -31,6 +31,7 @@ global repeater
 global pcount
 global cipher
 global intfmon
+global uuid
 
 maxpayload=258
 sc=randint(1,1024)
@@ -69,6 +70,7 @@ def configuration_parser(config_file):
     global repeater
     global pcount
     global intfmon
+    global uuid
     logger.info("Reading config file")
     config = configparser.ConfigParser()
     config.read(config_file)
@@ -101,8 +103,9 @@ def configuration_parser(config_file):
         print "Using chat room: %s" % config["general"]["channel"]
         privateircname = config["general"]["channel"]
         privateirc = (config["general"]["channel"] * ((16 / len(config["general"]["channel"])) + 1))[:16]
-    from utils import calculate_channel
+    from utils import calculate_channel, md5, getmac
     channel = calculate_channel()
+    uuid = md5(getmac(intfmon))[7:14]
     repeater = config["general"]["repeater"]
     pcount = config["general"]["pcount"]
     return config
