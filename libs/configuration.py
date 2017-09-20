@@ -38,7 +38,6 @@ sc=randint(1,1024)
 lastpacketsc=[]
 userlist={}
 bootime=time.time()
-pktcount=0
 pktcounts=0
 pktcountw=0
 pktcountpb=0
