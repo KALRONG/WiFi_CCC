@@ -230,6 +230,7 @@ def PacketSend(encrypted,payload):
         try:
             sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
             if verbose: print "Packet sent: %s" %(user)
+            print pktcounts
             pktcounts += 1
         except Exception as e:
             print "Cannot send packet! %s" %e.message
