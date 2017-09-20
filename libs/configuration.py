@@ -7,6 +7,19 @@ from utils import nick_selection, channel_selection
 logger = logging.getLogger(__name__)
 
 global conf
+global maxpayload
+global sc
+global lastpacketsc
+global userlist
+global bootime
+global pktcount
+global pktcounts
+global pktcountw
+global pktcountpb
+global pktcountpbd
+global pingcount
+global pingsc
+global broadcast
 global username
 global privateircname
 global remote
