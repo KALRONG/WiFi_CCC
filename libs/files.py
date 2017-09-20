@@ -24,3 +24,13 @@ def filecrypt(filename, chunksize):
 	except Exception as e:
 		print ":chat: error disecting file: %s. %s" %(filename, e.message)
 		return ''
+
+def remove_padding(message):
+    i=0
+    while i <= len(message):
+        if message[i] == "~":
+            i += 1
+            continue
+        else:
+            break
+    return message[:-i]
