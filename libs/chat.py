@@ -48,7 +48,7 @@ def PacketHandler(pkt):
     global lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc
     pktcount += 1
 
-    if pkt.addr3.upper() == remote:
+    if pkt.addr3.upper() == ':'.join(remote).upper():
         try:
             elt = pkt[Dot11Elt]
             usr = command = message = payload = ''

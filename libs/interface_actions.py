@@ -63,7 +63,7 @@ def PacketHandler(pkt):
     global pktcount, pktcountpb, pktcountpbd
     pktcount += 1
 
-    if pkt.addr3.upper() == remote:
+    if pkt.addr3.upper() == ':'.join(remote).upper():
         try:
             elt = pkt[Dot11Elt]
             usr = command = message = payload = ''
@@ -222,7 +222,7 @@ def PacketSend(encrypted,payload):
         eltpayload = Dot11Elt(ID=221,len=len(payload),info=payload) ## vendor/WPS
         dsset = Dot11Elt(ID='DSset',len=len(ds),info=ds)
         pkt = RadioTap()/dot11/Dot11ProbeReq()/eltessid/eltrates/eltchannel/eltpayload/eltuuid/eltuser/eltcommand/eltmessage/dsset
-        pkt.SC = sc    ## Update sequence number
+        #pkt.SC = sc    ## Update sequence number
         lastpacketsc.append(user+str(sc))   ## Save this packet to not repeat showing it
         pkt.show()
         if verbose > 1: print "Sent: %s,%s,%s,%s" %(user,command,message,payload)
@@ -242,6 +242,6 @@ def SetChannel():
     try:
         os.system(cmd0)
         os.system(cmd1)
-        print "Setting %s to channel: %s and MAC: %s" % (intfmon, channel, remote)
+        print "Setting %s to channel: %s and MAC: %s" % (intfmon, channel, ':'.join(remote).upper())
     except:
         print "Error setting channel for %s" % intfmon
