@@ -128,7 +128,6 @@ def PacketHandler(pkt):
                     os.makedirs("received")
                 from files import remove_padding
                 f = open(os.path.join("./received",decryptedmessage), 'a+b')
-                print remove_padding(decryptedpayload)
                 f.write(remove_padding(decryptedpayload))
                 f.close()
             else:
