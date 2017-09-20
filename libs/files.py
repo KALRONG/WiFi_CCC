@@ -6,6 +6,7 @@ def filecrypt(filename, chunksize):
     try:
         with open(filename, mode='rb') as payload:
             fileContent = base64.b64encode(payload.read())
+        print fileContent
     except:
         fileContent=''
         print ":chat: cannot open requested file: %s" %filename
