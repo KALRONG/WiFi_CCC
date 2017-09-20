@@ -5,7 +5,6 @@ from encryptions import decrypt, encrypt
 from files import filecrypt
 from utils import next_sc
 from chat import chatcrypt, cmdcrypt
-from configuration import remote, userlist
 
 
 ## InitMon: function to initialize monitor mode vif
@@ -59,8 +58,8 @@ def packetSniffer():
 
 ## PacketHandler: function to proccess received packets if related to chat
 def PacketHandler(pkt):
-    from configuration import verbose, repeater, pcount, lastpacketsc, pktcount, pktcountpb, pktcountpbd, pingcount, pingsc, intfmon, remote
-    global pktcount, pktcountpb, pktcountpbd, lastpacketsc, pingcount, pingsc
+    from configuration import verbose, repeater, pcount, lastpacketsc, pktcount, pktcountpb, pktcountpbd, pingcount, pingsc, intfmon, remote, userlist
+    global pktcount, pktcountpb, pktcountpbd, lastpacketsc, pingcount, pingsc, userlist
     print pktcount
     pktcount += 1
     print pktcount
@@ -149,7 +148,7 @@ def PacketHandler(pkt):
 
 # PacketProcessSend: function to process user commands
 def PacketProcessSend(chat):
-    from configuration import verbose, pcount, username
+    from configuration import verbose, pcount, username, userlist
     global sc,histfile
     user=username.strip()
     command = chat[:6]
@@ -236,7 +235,7 @@ def PacketSend(encrypted,payload):
 
 
 def SetChannel():
-    from configuration import intfmon, channel
+    from configuration import intfmon, channel, remote
     cmd0 = 'ifconfig %s up >/dev/null 2>&1' % (intfmon)
     cmd1 = 'iw dev %s set channel %s >/dev/null 2>&1' % (intfmon, channel)
     try:
