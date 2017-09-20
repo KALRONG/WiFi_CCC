@@ -71,7 +71,6 @@ def configuration_parser(config_file):
     global pcount
     global intfmon
     global uuid
-    global remote
     logger.info("Reading config file")
     config = configparser.ConfigParser()
     config.read(config_file)
