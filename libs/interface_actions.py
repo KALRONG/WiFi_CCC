@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 from scapy.all import *
-from configuration import userlist, broadcast, remote, channel, verbose, repeater, pcount
+from configuration import broadcast, remote, channel, verbose, repeater, pcount
 from encryptions import decrypt, encrypt
 from utils import next_sc
 from chat import chatcrypt, cmdcrypt
@@ -57,7 +57,7 @@ def packetSniffer():
 
 ## PacketHandler: function to proccess received packets if related to chat
 def PacketHandler(pkt):
-    global lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc, userlist
+    global lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc
     pktcount += 1
 
     if pkt.addr3.upper() == remote:
