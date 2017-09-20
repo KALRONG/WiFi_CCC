@@ -45,7 +45,11 @@ pingcount=0
 pingsc=[]
 broadcast='ff:ff:ff:ff:ff:ff'
 remote = []
-cipher = AES.new(channel_password(), AES.MODE_ECB)
+
+def create_cipher():
+    from utils import channel_password
+    global cipher
+    cipher = AES.new(channel_password(), AES.MODE_ECB)
 
 def argument_parser():
     parser = argparse.ArgumentParser()

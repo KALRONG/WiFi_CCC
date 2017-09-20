@@ -9,7 +9,7 @@ from libs.configuration import init_config
 def main():
     init_config()
     from libs.utils import banner, utilization, cleanexit, channel_password
-    from libs.configuration import username, channel, conf
+    from libs.configuration import username, channel, conf, create_cipher
     banner()
     if conf["general"]["history"]:
         try:
@@ -20,6 +20,7 @@ def main():
         except IOError:
             pass
     # Cipher suite: never use ECB in other place than a PoC
+    create_cipher()
     from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
     SetChannel(channel)
     sniffer = Thread(target=packetSniffer)
