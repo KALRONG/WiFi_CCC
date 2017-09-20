@@ -124,6 +124,11 @@ def PacketHandler(pkt):
                 print "chat: %s" % decryptedpayload
             elif decryptedcommand[:6] == ':file:':
                 print "chat: file received [%s] -> %s" % (decryptedmessage, decryptedpayload[:8])
+                if not os.path.exists("received"):
+                    os.makedirs("received")
+                f = open(os.path.join("./received",decryptedmessage), 'w')
+                f.write(decryptedpayload)
+                f.close()
             else:
                 print "(%s) %s[%s]: (%s) %s" % (
                     psc, decrypteduser, decryptedcommand, decryptedmessage, decryptedpayload)
