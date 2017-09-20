@@ -61,9 +61,7 @@ def PacketHandler(pkt):
     from configuration import verbose, repeater, remote
     import configuration
     #global pktcount, pktcountpb, pktcountpbd, lastpacketsc, pingcount, pingsc, userlist
-    print configuration.pktcount
     configuration.pktcount += 1
-    print configuration.pktcount
     if pkt.addr3.upper() == ':'.join(remote).upper():
         try:
             elt = pkt[Dot11Elt]
@@ -200,14 +198,15 @@ def PacketProcessSend(chat):
 
 ## PacketSend: function to construct the packet to be sent
 def PacketSend(encrypted,payload):
-    from configuration import channel, verbose, broadcast, lastpacketsc, pktcounts, uuid, intfmon, pcount, sc, remote
-    global uuid, sc, pktcounts
+    from configuration import channel, verbose, broadcast, lastpacketsc, uuid, intfmon, pcount, sc, remote
+    import configuration
+    global uuid
     for part in payload: # ojo - revisar
-        sc = next_sc()     ## Update sequence number
+        configuration.sc = next_sc()     ## Update sequence number
         user=encrypted[0]
         command=encrypted[1]
         message=encrypted[2]
-        uuidsc = uuid + ';' + str(sc)
+        uuidsc = uuid + ';' + str(configuration.sc)
         payload=part
         ds="\x01"
         rates="x98\x24\xb0\x48\x60\x6c"
@@ -223,14 +222,14 @@ def PacketSend(encrypted,payload):
         eltpayload = Dot11Elt(ID=221,len=len(payload),info=payload) ## vendor/WPS
         dsset = Dot11Elt(ID='DSset',len=len(ds),info=ds)
         pkt = RadioTap()/dot11/Dot11ProbeReq()/eltessid/eltrates/eltchannel/eltpayload/eltuuid/eltuser/eltcommand/eltmessage/dsset
-        pkt.SC = sc    ## Update sequence number
-        lastpacketsc.append(user+str(sc))   ## Save this packet to not repeat showing it
+        pkt.SC = configuration.sc    ## Update sequence number
+        lastpacketsc.append(user+str(configuration.sc))   ## Save this packet to not repeat showing it
         # pkt.show()
 
         try:
             sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
             if verbose > 1: print "Packet sent (%s): %s,%s,%s,%s,%s" % (sc, user, uuidsc, command, message, payload)
-            pktcounts += 1
+            configuration.pktcounts += 1
         except Exception as e:
            print "Cannot send packet! %s" %e.message
 
