@@ -4,12 +4,12 @@ from Crypto.Hash import MD5
 
 
 def current_timestamp():
-    global bootime
+    from configuration import bootime
     return (time.time() - bootime) * 1000000
 
 
 def next_sc():
-    global sc
+    from configuration import sc
     sc = (sc + 1) % 4096
     # return sc * 16  # Fragment number -> right 4 bits
     return sc
