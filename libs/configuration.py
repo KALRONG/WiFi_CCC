@@ -33,19 +33,38 @@ global cipher
 global intfmon
 global uuid
 
-maxpayload=258
-sc=randint(1,1024)
-lastpacketsc=[]
-userlist={}
-bootime=time.time()
-pktcounts=0
-pktcountw=0
-pktcountpb=0
-pktcountpbd=0
-pingcount=0
-pingsc=[]
-broadcast='ff:ff:ff:ff:ff:ff'
-remote = []
+def init_variables():
+    global maxpayload
+    global sc
+    global lastpacketsc
+    global userlist
+    global bootime
+    global pktcount
+    global pktcounts
+    global pktcountw
+    global pktcountpb
+    global pktcountpbd
+    global pingcount
+    global pingsc
+    global broadcast
+    global username
+    global privateircname
+    global privateirc
+    global remote
+    maxpayload=258
+    sc=randint(1,1024)
+    lastpacketsc=[]
+    userlist={}
+    bootime=time.time()
+    pktcount=0
+    pktcounts=0
+    pktcountw=0
+    pktcountpb=0
+    pktcountpbd=0
+    pingcount=0
+    pingsc=[]
+    broadcast='ff:ff:ff:ff:ff:ff'
+    remote = []
 
 def create_cipher():
     from utils import channel_password
@@ -114,3 +133,4 @@ def init_config():
     global conf
     log.init_logging()
     conf = configuration_parser(argument_parser().config)
+    init_variables()
