@@ -30,6 +30,7 @@ global channel
 global repeater
 global pcount
 global cipher
+global intfmon
 
 maxpayload=258
 sc=randint(1,1024)
@@ -67,6 +68,7 @@ def configuration_parser(config_file):
     global verbose
     global repeater
     global pcount
+    global intfmon
     logger.info("Reading config file")
     config = configparser.ConfigParser()
     config.read(config_file)
@@ -80,14 +82,14 @@ def configuration_parser(config_file):
         verbose = config["general"]["debug"]
     if not config.has_option("general","interface"):
         if config["general"]["interface"][:4] == 'wlan' or config["general"]["interface"][:3] == 'mon':
-            interface = config["general"]["interface"]
+            intfmon = config["general"]["interface"]
         else:
             print "First argument must be wlanx or monx!"
             exit(-1)
     else:
-        interface = raw_input("Enter your Wi-Fi interface: ")
-    if interface == '': interface = config["general"]["interface"]
-    if not InitMon(interface): exit(-1)
+        intfmon = raw_input("Enter your Wi-Fi interface: ")
+    if intfmon == '': intfmon = config["general"]["interface"]
+    if not InitMon(intfmon): exit(-1)
     if not config.has_option("general", "username"):
         nick_selection()
     else:
