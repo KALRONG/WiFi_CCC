@@ -5,11 +5,12 @@ from encryptions import decrypt, encrypt
 from files import filecrypt
 from utils import next_sc
 from chat import chatcrypt, cmdcrypt
-from configuration import remote, userlist, verbose, repeater, pcount
+from configuration import remote, userlist
 
 
 ## InitMon: function to initialize monitor mode vif
 def InitMon(interface):
+    from configuration import verbose
     global intfmon
     if not os.path.isdir("/sys/class/net/" + interface):
         logging.error("WiFi parent interface %s does not exist! Cannot continue!" %interface)
@@ -57,6 +58,7 @@ def packetSniffer():
 
 ## PacketHandler: function to proccess received packets if related to chat
 def PacketHandler(pkt):
+    from configuration import verbose, repeater, pcount
     global lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc
     pktcount += 1
 
@@ -145,6 +147,7 @@ def PacketHandler(pkt):
 
 # PacketProcessSend: function to process user commands
 def PacketProcessSend(chat):
+    from configuration import verbose, pcount
     global username,sc,histfile
     user=username.strip()
     command = chat[:6]
@@ -195,7 +198,7 @@ def PacketProcessSend(chat):
 
 ## PacketSend: function to construct the packet to be sent
 def PacketSend(encrypted,payload):
-    from configuration import channel
+    from configuration import channel, verbose
     global uuid,sc,lastpacketsc,pktcounts
     for part in payload: # ojo - revisar
         sc = next_sc()     ## Update sequence number
