@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-​
 # to-do: send files (receive in sync order and with integrity)
 import logging, os
-from Crypto.Cipher import AES
 from threading import Thread
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from libs.configuration import init_config
@@ -21,7 +20,6 @@ def main():
         except IOError:
             pass
     # Cipher suite: never use ECB in other place than a PoC
-    cipher = AES.new(channel_password(), AES.MODE_ECB)
     from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
     SetChannel(channel)
     sniffer = Thread(target=packetSniffer)

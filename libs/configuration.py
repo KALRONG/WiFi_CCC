@@ -2,6 +2,7 @@ import argparse, time
 import configparser
 import logging
 import log
+from Crypto.Cipher import AES
 from random import randint
 from utils import nick_selection, channel_selection
 logger = logging.getLogger(__name__)
@@ -28,6 +29,7 @@ global verbose
 global channel
 global repeater
 global pcount
+global cipher
 
 maxpayload=258
 sc=randint(1,1024)
@@ -43,6 +45,7 @@ pingcount=0
 pingsc=[]
 broadcast='ff:ff:ff:ff:ff:ff'
 remote = []
+cipher = AES.new(channel_password(), AES.MODE_ECB)
 
 def argument_parser():
     parser = argparse.ArgumentParser()

@@ -1,8 +1,8 @@
 import base64
-
+from configuration import cipher
 
 ## encrypt: function to base64 encode and encrypt user, command and message
-def encrypt(user, command, message, cipher):
+def encrypt(user, command, message):
     global maxpayload
 
     # Cipher and encode user
@@ -28,7 +28,7 @@ def encrypt(user, command, message, cipher):
     return encoded_user,encoded_command,encoded_message,chunksize
 
 ## decrypt: function to decrypt received packet fields and return them as a list
-def decrypt(user,command,message,payload, cipher):
+def decrypt(user,command,message,payload):
     try:
         dec_user = cipher.decrypt(base64.b64decode(user)).strip()
         dec_command = cipher.decrypt(base64.b64decode(command)).strip()
