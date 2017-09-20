@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger(__name__)
 from scapy.all import *
-from configuration import broadcast, remote, channel, verbose, repeater, pcount
+from configuration import userlist, remote, channel, verbose, repeater, pcount
 from encryptions import decrypt, encrypt
 from utils import next_sc
 from chat import chatcrypt, cmdcrypt
