@@ -72,7 +72,7 @@ def nick_selection():
 def channel_selection():
     privateircname = raw_input("Define private IRC channel name: ")
     privateirc = (privateircname * ((16 / len(privateircname)) + 1))[:16]
-    return privateirc
+    return privateirc, privateircname
 
 def channel_password():
     privateirckey = raw_input("Define private IRC robust password: ")

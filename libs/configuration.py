@@ -87,9 +87,10 @@ def configuration_parser(config_file):
         print "Using nickname: %s" % config["general"]["username"]
         username = config["general"]["username"]
     if not config.has_option("general", "channel"):
-        privateirc = channel_selection()
+        privateirc, privateircname = channel_selection()
     else:
         print "Using chat room: %s" % config["general"]["channel"]
+        privateircname = config["general"]["channel"]
         privateirc = (config["general"]["channel"] * ((16 / len(config["general"]["channel"])) + 1))[:16]
     from utils import calculate_channel
     channel = calculate_channel()
