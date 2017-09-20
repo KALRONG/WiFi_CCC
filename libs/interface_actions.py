@@ -59,7 +59,8 @@ def packetSniffer():
 
 ## PacketHandler: function to proccess received packets if related to chat
 def PacketHandler(pkt):
-    from configuration import verbose, repeater, pcount, lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc, intfmon
+    from configuration import verbose, repeater, pcount, lastpacketsc, pktcount, pktcountpb, pktcountpbd, pingcount, pingsc, intfmon
+    global pktcount, pktcountpb, pktcountpbd
     pktcount += 1
 
     if pkt.addr3.upper() == remote:
@@ -199,7 +200,7 @@ def PacketProcessSend(chat):
 ## PacketSend: function to construct the packet to be sent
 def PacketSend(encrypted,payload):
     from configuration import channel, verbose, broadcast, lastpacketsc, pktcounts, uuid, intfmon, pcount, sc
-    global uuid, sc
+    global uuid, sc, pktcounts
     for part in payload: # ojo - revisar
         sc = next_sc()     ## Update sequence number
         if verbose > 1: print "\nsc:%s" %sc
@@ -226,13 +227,12 @@ def PacketSend(encrypted,payload):
         #pkt.show()
         if verbose > 1: print "Sent: %s,%s,%s,%s" %(user,command,message,payload)
 
-        #try:
-        print pcount
-        sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
-        if verbose: print "Packet sent: %s" %(user)
-        pktcounts += 1
-        #except Exception as e:
-        #   print "Cannot send packet! %s" %e.message
+        try:
+            sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
+            if verbose: print "Packet sent: %s" %(user)
+            pktcounts += 1
+        except Exception as e:
+           print "Cannot send packet! %s" %e.message
 
 
 def SetChannel():

@@ -30,7 +30,7 @@ def getmac(interface):
 
 def cleanexit(histfile):
     from interface_actions import PacketProcessSend
-    from configuration import username, userlist, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname
+    from configuration import username, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname
     try:
         PacketProcessSend(":chat:%s left the chat room: %s!" %(username, privateircname)) ## User lefts group
         readline.write_history_file(histfile)
