@@ -198,8 +198,8 @@ def PacketProcessSend(chat):
 
 ## PacketSend: function to construct the packet to be sent
 def PacketSend(encrypted,payload):
-    from configuration import channel, verbose
-    global uuid,sc,lastpacketsc,pktcounts
+    from configuration import channel, verbose, broadcast, sc, lastpacketsc, pktcounts
+    global uuid
     for part in payload: # ojo - revisar
         sc = next_sc()     ## Update sequence number
         if verbose > 1: print "\nsc:%s" %sc
