@@ -1,38 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-​
 # to-do: send files (receive in sync order and with integrity)
-import logging
+import logging, os
 from Crypto.Cipher import AES
 from threading import Thread
-from random import randint
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-from scapy.all import * 
-
-# User defined variables
-verbose=0  ## debug level (1-3)
-pcount=6  ## number of packet 
-repeater=0  ## act also as repeater of other nodes
-history=1  ## remember commands
-defaultinterface='wlan1'  
-
-# System variables
-maxpayload=258
-sc=randint(1,1024)
-lastpacketsc=[]
-userlist={}
-bootime=time.time()
-pktcount=0
-pktcounts=0
-pktcountw=0
-pktcountpb=0
-pktcountpbd=0
-pingcount=0
-pingsc=[]
-broadcast='ff:ff:ff:ff:ff:ff'
-
 from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
 from libs.utils import banner, utilization, cleanexit, channel_password
-from libs.configuration import init_config, username, privateircname, channel
+from libs.configuration import init_config, username, privateircname, channel, conf
 
 def main():
     banner()
@@ -66,9 +41,7 @@ def main():
         cleanexit(histfile)
 
 if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        cleanexit(history)
+    main()
+
 
 
