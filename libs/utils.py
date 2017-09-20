@@ -93,5 +93,5 @@ def calculate_channel():
         if i == 5: channel = max(min(11, ord(letter) / 10), 1)
         i += 1
     remote = ':'.join(remote).upper()
-    print remote
+    print "algo %s" % remote
     return channel
