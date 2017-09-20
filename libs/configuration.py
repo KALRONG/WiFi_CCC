@@ -22,6 +22,7 @@ global pingsc
 global broadcast
 global username
 global privateircname
+global privateirc
 global remote
 global verbose
 global channel
@@ -55,6 +56,7 @@ def configuration_parser(config_file):
     global username
     global privateircname
     global privateirc
+    global channel
     global verbose
     global repeater
     global pcount
@@ -88,8 +90,9 @@ def configuration_parser(config_file):
         privateirc = channel_selection()
     else:
         print "Using chat room: %s" % config["general"]["channel"]
-        privateircname = config["general"]["channel"]
         privateirc = (config["general"]["channel"] * ((16 / len(config["general"]["channel"])) + 1))[:16]
+    from utils import calculate_channel
+    channel = calculate_channel()
     repeater = config["general"]["repeater"]
     pcount = config["general"]["pcount"]
     return config
