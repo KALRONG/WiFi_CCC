@@ -83,10 +83,10 @@ def configuration_parser(config_file):
     else:
         verbose = config["general"]["debug"]
     if config.has_option("general","interface"):
-        if config["general"]["interface"][:4] == 'wlan' or config["general"]["interface"][:3] == 'mon' or config["general"]["interface"][-3:] == 'mon':
+        if config["general"]["interface"][:4] == 'wlan' or config["general"]["interface"][:3] == 'mon' or config["general"]["interface"][3:] == 'wlp':
             intfmon = config["general"]["interface"]
         else:
-            print "Interface must be wlanx, monx or xmon!"
+            print "Interface must be wlanx, monx or wlpx!"
             exit(-1)
     else:
         intfmon = raw_input("Enter your Wi-Fi interface: ")
