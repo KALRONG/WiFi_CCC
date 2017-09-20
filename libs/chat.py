@@ -1,7 +1,7 @@
 import textwrap, base64, subprocess
 from scapy.all import *
 from encryptions import decrypt
-from configuration import remote, verbose, userlist, conf, repeater, pcount
+from configuration import remote, userlist, conf, repeater, pcount
 
 
 ## chatcrypt: function to cut payload in max size parts, cipher and encode each part
@@ -42,6 +42,7 @@ def cmdcrypt(execute,chunksize, cipher):
 
 
 def PacketHandler(pkt):
+    from configuration import verbose
     global lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc
     pktcount += 1
 
