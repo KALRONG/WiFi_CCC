@@ -28,19 +28,7 @@ global channel
 global repeater
 global pcount
 
-maxpayload=258
-sc=randint(1,1024)
-lastpacketsc=[]
-userlist={}
-bootime=time.time()
-pktcount=0
-pktcounts=0
-pktcountw=0
-pktcountpb=0
-pktcountpbd=0
-pingcount=0
-pingsc=[]
-broadcast='ff:ff:ff:ff:ff:ff'
+
 
 def argument_parser():
     parser = argparse.ArgumentParser()
@@ -105,3 +93,16 @@ def init_config():
     global broadcast
     log.init_logging()
     conf = configuration_parser(argument_parser().config)
+    maxpayload = 258
+    sc = randint(1, 1024)
+    lastpacketsc = []
+    userlist = {}
+    bootime = time.time()
+    pktcount = 0
+    pktcounts = 0
+    pktcountw = 0
+    pktcountpb = 0
+    pktcountpbd = 0
+    pingcount = 0
+    pingsc = []
+    broadcast = 'ff:ff:ff:ff:ff:ff'
