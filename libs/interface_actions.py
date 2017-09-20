@@ -2,8 +2,10 @@ import logging
 logger = logging.getLogger(__name__)
 from scapy.all import *
 from configuration import conf, userlist, broadcast, remote, channel, verbose
-from encryptions import decrypt
+from encryptions import decrypt, encrypt
 from utils import next_sc
+from chat import chatcrypt, cmdcrypt
+from files import filecrypt
 
 repeater = conf["general"]["repeater"]
 pcount = conf["general"]["pcount"]
@@ -145,9 +147,6 @@ def PacketHandler(pkt):
 
 # PacketProcessSend: function to process user commands
 def PacketProcessSend(chat):
-    from encryptions import encrypt
-    from chat import chatcrypt, cmdcrypt
-    from files import filecrypt
     global username,sc,histfile
     user=username.strip()
     command = chat[:6]
