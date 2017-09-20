@@ -3,8 +3,7 @@ import base64
 
 ## encrypt: function to base64 encode and encrypt user, command and message
 def encrypt(user, command, message):
-    from configuration import cipher
-    global maxpayload
+    from configuration import cipher, maxpayload
 
     # Cipher and encode user
     padd = len(user) % 16
