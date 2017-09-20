@@ -5,13 +5,14 @@ import logging, os
 from Crypto.Cipher import AES
 from threading import Thread
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
-from libs.utils import banner, utilization, cleanexit, channel_password
-from libs.configuration import init_config, username, privateircname, channel, conf
+from libs.configuration import init_config
 
 def main():
-    banner()
     init_config()
+    from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
+    from libs.utils import banner, utilization, cleanexit, channel_password
+    from libs.configuration import username, privateircname, channel, conf
+    banner()
     if conf["general"]["history"]:
         try:
             import readline
