@@ -66,17 +66,14 @@ def PacketHandler(pkt):
     if pkt.addr3.upper() == ':'.join(remote).upper():
         try:
             elt = pkt[Dot11Elt]
-            usr = command = message = payload = ''
-            psc = str(pkt.SC)
+            psc = usr = command = message = payload = ''
+            packetsc = str(pkt.SC)
             while isinstance(elt, Dot11Elt):
                 if elt.ID == 51:  ## AP Channel report
-                    uuid = elt.info
+                    uuid = elt.info.split(';')[0]
+                    psc = elt.info.split(';')[1]
                 elif elt.ID == 7:  ## 7 country
                     ciphereduser = elt.info  ## ciphered user
-                    if (ciphereduser + psc) in lastpacketsc:
-                        pktcountpbd += 1
-                        if verbose > 1: print "Packet discarded: %s" % (ciphereduser)
-                        return  ## silently discard packet, processed before
                 elif elt.ID == 16:  ## meassurement transmission
                     cipheredcommand = elt.info
                 elif elt.ID == 221:  ## vendor/WPS
@@ -85,10 +82,14 @@ def PacketHandler(pkt):
                     cipheredmessage = elt.info
                 elt = elt.payload
 
-            if verbose > 1: print "Received (encrypted): %s,%s,%s,%s" % (
-                ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload)
+            if (ciphereduser + psc) in lastpacketsc:
+                pktcountpbd += 1
+                if verbose > 1: print "Packet discarded (%s): %s" % (psc, ciphereduser)
+                return  ## silently discard packet, processed before
 
-            pktcountpb += 1
+            if verbose > 1: print "Received ENC (%s): %s,%s,%s,%s" % (
+            psc, ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload)
+
             decrypted = decrypt(ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload)
             decrypteduser = decrypted[0]
             decryptedcommand = decrypted[2]
@@ -96,8 +97,8 @@ def PacketHandler(pkt):
             decryptedpayload = decrypted[4]
             decryptedok = decrypted[5]  ## last field is checksum
             if verbose > 1: print decrypted
-            if verbose > 1: print "Received (decrypted): %s,%s,%s,%s" % (
-                decrypteduser, decryptedcommand, decryptedmessage, decryptedpayload)
+            if verbose > 1: print "Received DEC (%s): %s,%s,%s,%s" % (
+            psc, decrypteduser, decryptedcommand, decryptedmessage, decryptedpayload)
 
             if not decryptedok:
                 if verbose: print "Malformed packet received!"
@@ -139,8 +140,7 @@ def PacketHandler(pkt):
         try:
             # Resend packet for the first time as a repeater if packet is not ours
             if repeater:
-                if verbose: print "Repeating packet %s of user %s to the air" % (psc, decrypteduser)
-                sendp(pkt, iface=intfmon, verbose=0, count=pcount)
+                if verbose: print "Repeating packet (%s) of user %s to the air!" % (psc, decrypteduser)
         except:
             pass
         return
@@ -203,10 +203,10 @@ def PacketSend(encrypted,payload):
     global uuid, sc, pktcounts
     for part in payload: # ojo - revisar
         sc = next_sc()     ## Update sequence number
-        if verbose > 1: print "\nsc:%s" %sc
         user=encrypted[0]
         command=encrypted[1]
         message=encrypted[2]
+        uuidsc = uuid + ';' + str(sc)
         payload=part
         ds="\x01"
         rates="x98\x24\xb0\x48\x60\x6c"
@@ -216,7 +216,7 @@ def PacketSend(encrypted,payload):
         eltrates = Dot11Elt(ID=1,len=len(rates),info=rates)
         eltchannel = Dot11Elt(ID=3,len=1,info=chr(channel))
         eltuser = Dot11Elt(ID=7,len=len(user),info=user) ## country
-        eltuuid = Dot11Elt(ID=51,len=len(uuid),info=uuid) ## ap channel report
+        eltuuid = Dot11Elt(ID=51, len=len(uuidsc), info=uuidsc)  ## ap channel report
         eltcommand = Dot11Elt(ID=16,len=len(command),info=command)  ## meassurement transmission
         eltmessage = Dot11Elt(ID=66,len=len(message),info=message) ## extended rates
         eltpayload = Dot11Elt(ID=221,len=len(payload),info=payload) ## vendor/WPS
@@ -224,11 +224,11 @@ def PacketSend(encrypted,payload):
         pkt = RadioTap()/dot11/Dot11ProbeReq()/eltessid/eltrates/eltchannel/eltpayload/eltuuid/eltuser/eltcommand/eltmessage/dsset
         pkt.SC = sc    ## Update sequence number
         lastpacketsc.append(user+str(sc))   ## Save this packet to not repeat showing it
-        if verbose > 1: print "Sent: %s,%s,%s,%s" %(user,command,message,payload)
+        # pkt.show()
 
         try:
             sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
-            if verbose: print "Packet sent: %s" %(user)
+            if verbose > 1: print "Packet sent (%s): %s,%s,%s,%s,%s" % (sc, user, uuidsc, command, message, payload)
             pktcounts += 1
         except Exception as e:
            print "Cannot send packet! %s" %e.message
