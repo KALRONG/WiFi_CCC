@@ -25,6 +25,8 @@ global privateircname
 global remote
 global verbose
 global channel
+global repeater
+global pcount
 
 maxpayload=258
 sc=randint(1,1024)
@@ -51,6 +53,8 @@ def argument_parser():
 def configuration_parser(config_file):
     from interface_actions import InitMon
     global verbose
+    global repeater
+    global pcount
     logger.info("Reading config file")
     config = configparser.ConfigParser()
     config.read(config_file)
@@ -80,6 +84,8 @@ def configuration_parser(config_file):
         channel_selection()
     else:
         print "Using chat room: %s" % config["general"]["channel"]
+    repeater = config["general"]["repeater"]
+    pcount = config["general"]["pcount"]
     return config
 
 

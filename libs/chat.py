@@ -1,10 +1,8 @@
 import textwrap, base64, subprocess
 from scapy.all import *
 from encryptions import decrypt
-from configuration import remote, verbose, userlist, conf
+from configuration import remote, verbose, userlist, conf, repeater, pcount
 
-repeater = conf["general"]["repeater"]
-pcount = conf["general"]["pcount"]
 
 ## chatcrypt: function to cut payload in max size parts, cipher and encode each part
 def chatcrypt(payload, chunksize, cipher):
