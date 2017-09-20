@@ -4,8 +4,9 @@ from scapy.all import *
 from encryptions import decrypt, encrypt
 from chat import chatcrypt, cmdcrypt
 from files import filecrypt
-from configuration import userlist, remote, channel, verbose, repeater, pcount
+from configuration import userlist, channel, verbose, repeater, pcount
 from utils import next_sc
+from configuration import remote
 
 
 ## InitMon: function to initialize monitor mode vif
