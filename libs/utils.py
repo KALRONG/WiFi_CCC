@@ -93,5 +93,5 @@ def calculate_channel():
             remote.append(letter.encode("hex"))
         if i == 5: channel = max(min(11, ord(letter) / 10), 1)
         i += 1
-    buff = ':'.join(remote).upper()
+    buff = str(':'.join(remote).upper())
     return channel, buff
