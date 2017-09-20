@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-​
 import time, sys, readline
 from Crypto.Hash import MD5
-from configuration import username, userlist, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname
 
 
 def current_timestamp():
@@ -31,6 +30,7 @@ def getmac(interface):
 
 def cleanexit(histfile):
     from interface_actions import PacketProcessSend
+    from configuration import username, userlist, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname
     try:
         PacketProcessSend(":chat:%s left the chat room: %s!" %(username, privateircname)) ## User lefts group
         readline.write_history_file(histfile)
@@ -62,6 +62,7 @@ def utilization():
     print "======================================================\n"
 
 def nick_selection():
+    from configuration import userlist
     username = raw_input("Enter your User name or alias: ")
     if username == '': exit()
     if username[0] == ":": exit()
