@@ -62,7 +62,7 @@ def utilization():
     print "======================================================\n"
 
 def nick_selection():
-    from configuration import userlist
+    from configuration import userlist, intfmon
     username = raw_input("Enter your User name or alias: ")
     if username == '': exit()
     if username[0] == ":": exit()
@@ -83,7 +83,6 @@ def channel_password():
 # Calculate channel to be used and mac address - TODO: mac derivation other way
 def calculate_channel():
     from configuration import privateirc
-    remote=[]
     buff=""
     letter=""
     for i in range(0, 6):
