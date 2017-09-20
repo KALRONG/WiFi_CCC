@@ -41,6 +41,7 @@ pktcountpbd=0
 pingcount=0
 pingsc=[]
 broadcast='ff:ff:ff:ff:ff:ff'
+remote = []
 
 def argument_parser():
     parser = argparse.ArgumentParser()

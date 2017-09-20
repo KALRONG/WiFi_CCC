@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-​
 import time, sys, readline
 from Crypto.Hash import MD5
-from configuration import username, userlist, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname, remote
+from configuration import username, userlist, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname
 
 
 def current_timestamp():
@@ -81,8 +81,8 @@ def channel_password():
 
 # Calculate channel to be used and mac address - TODO: mac derivation other way
 def calculate_channel():
+    from configuration import remote
     privateirc = channel_selection()
-    remote = []
     letter=""
     for i in range(0, 6):
         if i < 1:

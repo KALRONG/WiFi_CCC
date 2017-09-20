@@ -5,8 +5,7 @@ from encryptions import decrypt, encrypt
 from files import filecrypt
 from utils import next_sc
 from chat import chatcrypt, cmdcrypt
-from configuration import remote
-from configuration import userlist, channel, verbose, repeater, pcount
+from configuration import remote, userlist, channel, verbose, repeater, pcount
 
 
 ## InitMon: function to initialize monitor mode vif
