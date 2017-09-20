@@ -61,8 +61,9 @@ def packetSniffer():
 def PacketHandler(pkt):
     from configuration import verbose, repeater, pcount, lastpacketsc, pktcount, pktcountpb, pktcountpbd, pingcount, pingsc, intfmon, remote
     global pktcount, pktcountpb, pktcountpbd, lastpacketsc, pingcount, pingsc
+    print pktcount
     pktcount += 1
-
+    print pktcount
     if pkt.addr3.upper() == ':'.join(remote).upper():
         try:
             elt = pkt[Dot11Elt]
