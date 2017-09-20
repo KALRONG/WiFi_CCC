@@ -6,7 +6,6 @@ def filecrypt(filename, chunksize):
     try:
         with open(filename, mode='rb') as payload:
             fileContent = base64.b64encode(payload.read())
-        print fileContent
     except:
         fileContent=''
         print ":chat: cannot open requested file: %s" %filename
@@ -14,6 +13,7 @@ def filecrypt(filename, chunksize):
     try:
         from configuration import cipher
         parts = textwrap.wrap(fileContent, chunksize, break_on_hyphens=False)
+        print len(parts)
         encoded_parts=set()
         for part in parts:
             lastpadd = len(part) % 16
