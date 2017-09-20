@@ -10,8 +10,7 @@ from configuration import remote, userlist
 
 ## InitMon: function to initialize monitor mode vif
 def InitMon(interface):
-    from configuration import verbose
-    global intfmon
+    from configuration import verbose, intfmon
     if not os.path.isdir("/sys/class/net/" + interface):
         logging.error("WiFi parent interface %s does not exist! Cannot continue!" %interface)
         return False
@@ -48,6 +47,7 @@ def InitMon(interface):
 
 
 def packetSniffer():
+    from configuration import intfmon
     try:
         sniff(iface=intfmon, prn=PacketHandler, store=False, lfilter=lambda pkt: (Dot11ProbeReq in pkt))
     except Exception as e:
@@ -236,6 +236,7 @@ def PacketSend(encrypted,payload):
 
 
 def SetChannel(channel):
+    from configuration import intfmon
     cmd0 = 'ifconfig %s up >/dev/null 2>&1' % (intfmon)
     cmd1 = 'iw dev %s set channel %s >/dev/null 2>&1' % (intfmon, channel)
     try:
