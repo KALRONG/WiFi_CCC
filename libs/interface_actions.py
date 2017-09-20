@@ -142,7 +142,8 @@ def PacketHandler(pkt):
             pass
         return
 
-## PacketProcessSend: function to process user commands
+
+# PacketProcessSend: function to process user commands
 def PacketProcessSend(chat):
     from encryptions import encrypt
     from chat import chatcrypt, cmdcrypt
