@@ -27,10 +27,10 @@ def filecrypt(filename, chunksize):
 
 def remove_padding(message):
     i=0
-    while i <= len(message):
+    while i < len(message):
         if message[i] == "~":
             i += 1
             continue
         else:
             break
-    return message[:-i]
+    return message[:i]
