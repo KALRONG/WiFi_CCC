@@ -46,7 +46,7 @@ pktcountpbd=0
 pingcount=0
 pingsc=[]
 broadcast='ff:ff:ff:ff:ff:ff'
-remote = ""
+remote = []
 
 def create_cipher():
     from utils import channel_password
