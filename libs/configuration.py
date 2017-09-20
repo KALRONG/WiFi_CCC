@@ -71,6 +71,7 @@ def configuration_parser(config_file):
     global pcount
     global intfmon
     global uuid
+    global remote
     logger.info("Reading config file")
     config = configparser.ConfigParser()
     config.read(config_file)
@@ -104,7 +105,7 @@ def configuration_parser(config_file):
         privateircname = config["general"]["channel"]
         privateirc = (config["general"]["channel"] * ((16 / len(config["general"]["channel"])) + 1))[:16]
     from utils import calculate_channel, md5, getmac
-    channel = calculate_channel()
+    channel, remote = calculate_channel()
     uuid = md5(getmac(intfmon))[7:14]
     repeater = int(config["general"]["repeater"])
     pcount = int(config["general"]["pcount"])
