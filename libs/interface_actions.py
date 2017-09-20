@@ -235,8 +235,8 @@ def PacketSend(encrypted,payload):
             print "Cannot send packet! %s" %e.message
 
 
-def SetChannel(channel):
-    from configuration import intfmon
+def SetChannel():
+    from configuration import intfmon, channel
     cmd0 = 'ifconfig %s up >/dev/null 2>&1' % (intfmon)
     cmd1 = 'iw dev %s set channel %s >/dev/null 2>&1' % (intfmon, channel)
     try:
