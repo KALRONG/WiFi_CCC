@@ -48,6 +48,7 @@ def InitMon(interface):
 
 def packetSniffer():
     from configuration import intfmon
+    print intfmon
     try:
         sniff(iface=intfmon, prn=PacketHandler, store=False, lfilter=lambda pkt: (Dot11ProbeReq in pkt))
     except Exception as e:

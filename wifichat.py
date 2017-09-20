@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-​
 # to-do: send files (receive in sync order and with integrity)
-import logging, os
+import logging, os, sys
 from threading import Thread
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from libs.configuration import init_config
