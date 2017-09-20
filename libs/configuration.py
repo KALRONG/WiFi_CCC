@@ -52,6 +52,9 @@ def argument_parser():
 
 def configuration_parser(config_file):
     from interface_actions import InitMon
+    global username
+    global privateircname
+    global privateirc
     global verbose
     global repeater
     global pcount
