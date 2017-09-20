@@ -84,16 +84,14 @@ def channel_password():
 def calculate_channel():
     from configuration import privateirc, remote
     global remote
-    buff = []
-    letter=""
     for i in range(0, 6):
         if i < 1:
-            buff.append('61')
+            remote.append('61')
         else:
             letter = privateirc[i]
-            buff.append(letter.encode("hex"))
+            remote.append(letter.encode("hex"))
         if i == 5: channel = max(min(11, ord(letter) / 10), 1)
         i += 1
-    remote = ':'.join(buff).upper()
+    remote = ':'.join(remote).upper()
     print remote
     return channel
