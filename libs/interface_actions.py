@@ -127,7 +127,7 @@ def PacketHandler(pkt):
                 if not os.path.exists("received"):
                     os.makedirs("received")
                 from files import remove_padding
-                f = open(os.path.join("./received",remove_padding(decryptedmessage)), 'a+b')
+                f = open(os.path.join("./received",remove_padding(decryptedmessage)), 'w')
                 f.write(decryptedpayload)
                 f.close()
             else:
