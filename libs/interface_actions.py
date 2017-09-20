@@ -84,7 +84,6 @@ def PacketHandler(pkt):
             if (ciphereduser + psc) in configuration.lastpacketsc:
                 configuration.pktcountpbd += 1
                 if verbose > 1: print "Packet discarded (%s): %s" % (psc, ciphereduser)
-                print verbose
                 return  ## silently discard packet, processed before
 
             if verbose > 1: print "Received ENC (%s): %s,%s,%s,%s" % (
