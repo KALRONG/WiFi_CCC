@@ -7,19 +7,6 @@ from utils import nick_selection, channel_selection
 logger = logging.getLogger(__name__)
 
 global conf
-global maxpayload
-global sc
-global lastpacketsc
-global userlist
-global bootime
-global pktcount
-global pktcounts
-global pktcountw
-global pktcountpb
-global pktcountpbd
-global pingcount
-global pingsc
-global broadcast
 global username
 global privateircname
 global remote
@@ -28,7 +15,19 @@ global channel
 global repeater
 global pcount
 
-
+maxpayload=258
+sc=randint(1,1024)
+lastpacketsc=[]
+userlist={}
+bootime=time.time()
+pktcount=0
+pktcounts=0
+pktcountw=0
+pktcountpb=0
+pktcountpbd=0
+pingcount=0
+pingsc=[]
+broadcast='ff:ff:ff:ff:ff:ff'
 
 def argument_parser():
     parser = argparse.ArgumentParser()
@@ -78,31 +77,5 @@ def configuration_parser(config_file):
 
 def init_config():
     global conf
-    global maxpayload
-    global sc
-    global lastpacketsc
-    global userlist
-    global bootime
-    global pktcount
-    global pktcounts
-    global pktcountw
-    global pktcountpb
-    global pktcountpbd
-    global pingcount
-    global pingsc
-    global broadcast
     log.init_logging()
     conf = configuration_parser(argument_parser().config)
-    maxpayload = 258
-    sc = randint(1, 1024)
-    lastpacketsc = []
-    userlist = {}
-    bootime = time.time()
-    pktcount = 0
-    pktcounts = 0
-    pktcountw = 0
-    pktcountpb = 0
-    pktcountpbd = 0
-    pingcount = 0
-    pingsc = []
-    broadcast = 'ff:ff:ff:ff:ff:ff'
