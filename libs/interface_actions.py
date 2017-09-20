@@ -5,7 +5,7 @@ from encryptions import decrypt, encrypt
 from files import filecrypt
 from utils import next_sc
 from chat import chatcrypt, cmdcrypt
-from configuration import remote, userlist, channel, verbose, repeater, pcount
+from configuration import remote, userlist, verbose, repeater, pcount
 
 
 ## InitMon: function to initialize monitor mode vif
@@ -195,6 +195,7 @@ def PacketProcessSend(chat):
 
 ## PacketSend: function to construct the packet to be sent
 def PacketSend(encrypted,payload):
+    from configuration import channel
     global uuid,sc,lastpacketsc,pktcounts
     for part in payload: # ojo - revisar
         sc = next_sc()     ## Update sequence number
