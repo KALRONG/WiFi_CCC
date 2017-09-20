@@ -82,7 +82,7 @@ def channel_password():
 
 # Calculate channel to be used and mac address - TODO: mac derivation other way
 def calculate_channel():
-    from configuration import remote, privateirc, channel
+    from configuration import remote, privateirc
     letter=""
     for i in range(0, 6):
         if i < 1:
@@ -93,3 +93,4 @@ def calculate_channel():
         if i == 5: channel = max(min(11, ord(letter) / 10), 1)
         i += 1
     remote = ':'.join(remote).upper()
+    return channel
