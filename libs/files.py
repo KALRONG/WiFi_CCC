@@ -29,6 +29,7 @@ def remove_padding(message):
     i=0
     while i < len(message):
         print message[i]
+        print i
         if message[i] == "~":
             i += 1
             continue
