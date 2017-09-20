@@ -10,7 +10,7 @@ from libs.configuration import init_config
 def main():
     init_config()
     from libs.utils import banner, utilization, cleanexit, channel_password
-    from libs.configuration import username, privateircname, channel, conf
+    from libs.configuration import username, channel, conf
     banner()
     if conf["general"]["history"]:
         try:
@@ -28,6 +28,7 @@ def main():
     sniffer.daemon = True
     sniffer.start()
     utilization()
+    from libs.configuration import privateircname
     try:
         PacketProcessSend("%s joined the chat room: %s" % (username, privateircname))  ## User entering group
         while 1:
