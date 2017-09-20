@@ -209,7 +209,6 @@ def PacketSend(encrypted,payload):
         payload=part
         ds="\x01"
         rates="x98\x24\xb0\x48\x60\x6c"
-        print "algo %s" % channel
         # Forge Dot11packet
         dot11 = Dot11(type=0,subtype=4,addr1=broadcast, addr2=RandMAC(),addr3=remote)
         eltessid = Dot11Elt(ID=0,len=0,info='')
@@ -224,7 +223,7 @@ def PacketSend(encrypted,payload):
         pkt = RadioTap()/dot11/Dot11ProbeReq()/eltessid/eltrates/eltchannel/eltpayload/eltuuid/eltuser/eltcommand/eltmessage/dsset
         pkt.SC = sc    ## Update sequence number
         lastpacketsc.append(user+str(sc))   ## Save this packet to not repeat showing it
-        pkt.show()
+        #pkt.show()
         if verbose > 1: print "Sent: %s,%s,%s,%s" %(user,command,message,payload)
 
         try:
