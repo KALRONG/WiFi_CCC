@@ -8,8 +8,8 @@ from libs.configuration import init_config
 
 def main():
     init_config()
-    from libs.utils import banner, utilization, cleanexit, channel_password
-    from libs.configuration import username, channel, conf, create_cipher
+    from libs.utils import banner, utilization, cleanexit
+    from libs.configuration import username, conf, create_cipher
     banner()
     if conf["general"]["history"]:
         try:
@@ -22,7 +22,7 @@ def main():
     # Cipher suite: never use ECB in other place than a PoC
     create_cipher()
     from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
-    SetChannel(channel)
+    SetChannel()
     sniffer = Thread(target=packetSniffer)
     sniffer.daemon = True
     sniffer.start()
