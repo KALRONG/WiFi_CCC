@@ -43,8 +43,9 @@ def cmdcrypt(execute,chunksize):
 
 
 def PacketHandler(pkt):
-    from configuration import verbose, repeater, pcount, remote, userlist
-    global lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc, userlist
+    from configuration import verbose, repeater, pcount, remote
+    import configuration
+    global lastpacketsc, pktcount, pktcountpb, pktcountpbd, pktcountw, pingcount, pingsc
     pktcount += 1
 
     if pkt.addr3.upper() == ':'.join(remote).upper():
@@ -88,7 +89,7 @@ def PacketHandler(pkt):
                 return
 
             # Add user, if new, to the discovered users dictionary
-            if not userlist.has_key(uuid): userlist[uuid] = decrypteduser
+            if not userlist.has_key(uuid): configuration.userlist[uuid] = decrypteduser
 
             # Show results of received packet
             pktcountw = + 1
