@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-​
 import time, sys, readline
 from Crypto.Hash import MD5
-from interface import PacketProcessSend
+from interface_actions import PacketProcessSend
 from configuration import username, userlist, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname, remote
 
 

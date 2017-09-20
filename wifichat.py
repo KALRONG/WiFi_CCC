@@ -30,7 +30,7 @@ pingcount=0
 pingsc=[]
 broadcast='ff:ff:ff:ff:ff:ff'
 
-from libs.interface import packetSniffer, PacketProcessSend, SetChannel
+from libs.interface_actions import packetSniffer, PacketProcessSend, SetChannel
 from libs.utils import banner, utilization, cleanexit, channel_password
 from libs.configuration import init_config, username, privateircname, channel
 

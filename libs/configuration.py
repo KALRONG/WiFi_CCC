@@ -49,7 +49,7 @@ def argument_parser():
 
 
 def configuration_parser(config_file):
-    from interface import InitMon
+    from interface_actions import InitMon
     global verbose
     logger.info("Reading config file")
     config = configparser.ConfigParser()
