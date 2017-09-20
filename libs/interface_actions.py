@@ -58,11 +58,12 @@ def packetSniffer():
 
 ## PacketHandler: function to proccess received packets if related to chat
 def PacketHandler(pkt):
-    from configuration import verbose, repeater, pcount, lastpacketsc, pktcount, pktcountpb, pktcountpbd, pingcount, pingsc, intfmon, remote, userlist
-    global pktcount, pktcountpb, pktcountpbd, lastpacketsc, pingcount, pingsc, userlist
-    print pktcount
-    pktcount += 1
-    print pktcount
+    from configuration import verbose, repeater, remote
+    import configuration
+    #global pktcount, pktcountpb, pktcountpbd, lastpacketsc, pingcount, pingsc, userlist
+    print configuration.pktcount
+    configuration.pktcount += 1
+    print configuration.pktcount
     if pkt.addr3.upper() == ':'.join(remote).upper():
         try:
             elt = pkt[Dot11Elt]
@@ -83,7 +84,7 @@ def PacketHandler(pkt):
                 elt = elt.payload
 
             if (ciphereduser + psc) in lastpacketsc:
-                pktcountpbd += 1
+                configuration.pktcountpbd += 1
                 if verbose > 1: print "Packet discarded (%s): %s" % (psc, ciphereduser)
                 return  ## silently discard packet, processed before
 
@@ -105,20 +106,20 @@ def PacketHandler(pkt):
                 return
 
             # Add user, if new, to the discovered users dictionary
-            if not userlist.has_key(uuid): userlist[uuid] = decrypteduser
+            if not configuration.userlist.has_key(uuid): configuration.userlist[uuid] = decrypteduser
 
             # Show results of received packet
             pktcountw = + 1
             if decryptedcommand[:6] == ':msgs:':
                 print "%s: %s" % (decrypteduser, decryptedpayload)
             elif decryptedcommand[:6] == ':ping:':
-                if not psc + decrypteduser in pingsc:
-                    pingsc.append(psc + decrypteduser)
+                if not psc + decrypteduser in configuration.pingsc:
+                    configuration.pingsc.append(psc + decrypteduser)
                     pingcount = 0
                     print ""
-                pingcount += 1
+                configuration.pingcount += 1
                 sys.stdout.write("\033[F")  # Cursor up one line
-                print "chat: %d/%s ping packets received from %s!" % (pingcount, decryptedmessage, decrypteduser)
+                print "chat: %d/%s ping packets received from %s!" % (configuration.pingcount, decryptedmessage, decrypteduser)
             elif decryptedcommand[:6] == ':cmmd:':
                 print "%s: executed [%s] -> %s" % (decrypteduser, decryptedmessage, decryptedpayload)
             elif decryptedcommand[:6] == ':chat:':
@@ -130,7 +131,7 @@ def PacketHandler(pkt):
                     psc, decrypteduser, decryptedcommand, decryptedmessage, decryptedpayload)
 
             if not decryptedcommand[:6] == ':ping:':
-                lastpacketsc.append(ciphereduser + psc)
+                configuration.lastpacketsc.append(ciphereduser + psc)
             else:
                 return
 
