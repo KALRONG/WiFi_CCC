@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-​
 import time, sys, readline
 from Crypto.Hash import MD5
-from interface_actions import PacketProcessSend
 from configuration import username, userlist, pktcount, pktcountpb, pktcountw, pktcountpbd, pktcounts, privateircname, remote
 
 
@@ -31,6 +30,7 @@ def getmac(interface):
     return mac[0:17]
 
 def cleanexit(histfile):
+    from interface_actions import PacketProcessSend
     try:
         PacketProcessSend(":chat:%s left the chat room: %s!" %(username, privateircname)) ## User lefts group
         readline.write_history_file(histfile)
