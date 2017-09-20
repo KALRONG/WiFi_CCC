@@ -83,7 +83,7 @@ def PacketHandler(pkt):
                     cipheredmessage = elt.info
                 elt = elt.payload
 
-            if (ciphereduser + psc) in lastpacketsc:
+            if (ciphereduser + psc) in configuration.lastpacketsc:
                 configuration.pktcountpbd += 1
                 if verbose > 1: print "Packet discarded (%s): %s" % (psc, ciphereduser)
                 return  ## silently discard packet, processed before
