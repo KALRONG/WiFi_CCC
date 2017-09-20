@@ -2,11 +2,11 @@ import logging
 logger = logging.getLogger(__name__)
 from scapy.all import *
 from encryptions import decrypt, encrypt
-from chat import chatcrypt, cmdcrypt
 from files import filecrypt
 from configuration import userlist, channel, verbose, repeater, pcount
 from utils import next_sc
 from configuration import remote
+from chat import chatcrypt, cmdcrypt
 
 
 ## InitMon: function to initialize monitor mode vif
