@@ -2,7 +2,8 @@ import textwrap, base64
 
 
 ## filecrypt: function to split files in small parts and encrypt them
-def filecrypt(filename, chunksize, cipher):
+def filecrypt(filename, chunksize):
+    from configuration import cipher
 	try:
 		with open(filename, mode='rb') as payload:
 			fileContent = payload.read()
