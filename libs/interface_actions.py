@@ -60,7 +60,7 @@ def packetSniffer():
 ## PacketHandler: function to proccess received packets if related to chat
 def PacketHandler(pkt):
     from configuration import verbose, repeater, pcount, lastpacketsc, pktcount, pktcountpb, pktcountpbd, pingcount, pingsc, intfmon, remote
-    global pktcount, pktcountpb, pktcountpbd
+    global pktcount, pktcountpb, pktcountpbd, lastpacketsc, pingcount, pingsc
     pktcount += 1
 
     if pkt.addr3.upper() == ':'.join(remote).upper():
