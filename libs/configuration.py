@@ -84,6 +84,7 @@ def configuration_parser(config_file):
         if config["general"]["interface"][:4] == 'wlan' or config["general"]["interface"][:3] == 'mon':
             intfmon = config["general"]["interface"]
         else:
+            print config["general"]["interface"][:3]
             print "First argument must be wlanx or monx!"
             exit(-1)
     else:
