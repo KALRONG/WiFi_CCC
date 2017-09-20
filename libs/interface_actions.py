@@ -147,8 +147,8 @@ def PacketHandler(pkt):
 
 # PacketProcessSend: function to process user commands
 def PacketProcessSend(chat):
-    from configuration import verbose, pcount
-    global username,sc,histfile
+    from configuration import verbose, pcount, username
+    global sc,histfile
     user=username.strip()
     command = chat[:6]
     message = chat[6:]
