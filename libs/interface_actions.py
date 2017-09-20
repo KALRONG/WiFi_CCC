@@ -224,11 +224,10 @@ def PacketSend(encrypted,payload):
         pkt = RadioTap()/dot11/Dot11ProbeReq()/eltessid/eltrates/eltchannel/eltpayload/eltuuid/eltuser/eltcommand/eltmessage/dsset
         pkt.SC = sc    ## Update sequence number
         lastpacketsc.append(user+str(sc))   ## Save this packet to not repeat showing it
-        #pkt.show()
+        pkt.show()
         if verbose > 1: print "Sent: %s,%s,%s,%s" %(user,command,message,payload)
 
         try:
-            print pktcounts
             sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
             if verbose: print "Packet sent: %s" %(user)
             pktcounts += 1
