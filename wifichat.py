@@ -29,7 +29,7 @@ def main():
     try:
         PacketProcessSend("%s joined the chat room: %s" % (username, privateircname))  ## User entering group
         while 1:
-            chat = raw_input("send: ")
+            chat = raw_input()
             if chat != ":exit:":
                 sys.stdout.write("\033[F")  # Cursor up one line
                 if chat != '':
