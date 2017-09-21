@@ -4,10 +4,11 @@ import base64
 ## encrypt: function to base64 encode and encrypt user, command and message
 def encrypt(user, command, message):
     from configuration import cipher, maxpayload
-    cipher.encrypt(user)
+
     # Cipher and encode user
     padd = len(user) % 16
     if padd > 0: user = user + (' ' * (16 - padd))
+    cipher.encrypt(user)
     encoded_user = base64.b64encode(cipher.encrypt(user))
 
     # Cipher and encode command
