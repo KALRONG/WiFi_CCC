@@ -43,7 +43,7 @@ def main():
 
 if __name__ == "__main__":
     import libs.log as log
-    import libs.config as config
+    import libs.configuration as config
 
     log.init_logging()
     config.init_config()
