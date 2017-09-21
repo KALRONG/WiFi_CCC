@@ -11,7 +11,7 @@ from chat import chatcrypt, cmdcrypt
 def InitMon(interface):
     from configuration import verbose, intfmon
     if not os.path.isdir("/sys/class/net/" + interface):
-        logging.error("WiFi parent interface %s does not exist! Cannot continue!" %interface)
+        logger.error("WiFi parent interface %s does not exist! Cannot continue!" %interface)
         return False
     else:
         intfmon = 'mon' + interface[-1]
@@ -21,7 +21,7 @@ def InitMon(interface):
                 os.system("iw dev %s del" % intfmon)
                 time.sleep(0.3)
             except OSError as e:
-                logging.error("Could not delete monitor interface %s" % intfmon)
+                logger.error("Could not delete monitor interface %s" % intfmon)
                 os.kill(os.getpid(), SIGINT)
                 return False
         try:
