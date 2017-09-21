@@ -52,7 +52,6 @@ def packetSniffer():
     except Exception as e:
         logger.error("Error starting sniffer!")
         print "Error starting sniffer! %s" % e.message
-        print "algo %s" % intfmon
         exit()
 
 
