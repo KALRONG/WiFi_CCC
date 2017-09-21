@@ -27,16 +27,22 @@ def InitMon(interface):
         try:
             logger.info("Creating monitor interface using iw")
             # create monitor interface using iw
+            logger.debug("Creating monitor interface")
             os.system("iw dev %s interface add %s type monitor" % (interface, intfmon))
             time.sleep(0.2)
+            logger.debug("rfkill block interface")
             os.system("rfkill block %s" %interface[-1])
             time.sleep(0.2)
+            logger.debug("Shutting down interface")
             os.system("ifconfig %s down" %interface)
             time.sleep(0.2)
+            logger.debug("Changing interface to monitor mode")
             os.system("iwconfig %s mode monitor" %interface)
             time.sleep(0.2)
+            logger.debug(("rfkill unblock interface"))
             os.system("rfkill unblock %s" %interface[-1])
             time.sleep(0.2)
+            logger.debug("Bringing interface up")
             os.system("ifconfig %s up" %interface)
             if verbose > 1: logging.debug("Creating monitor VAP %s for parent %s..." %(intfmon, interface))
         except OsError as e:
