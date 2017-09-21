@@ -27,7 +27,8 @@ def main():
     utilization()
     from libs.configuration import privateircname
     try:
-        PacketProcessSend("%s joined the chat room: %s" % (username, privateircname))  ## User entering group
+        #PacketProcessSend("%s joined the chat room: %s" % (username, privateircname))  ## User entering group
+        PacketProcessSend(":chat:%s join the chat room: %s!" % (username, privateircname))  ## User lefts group
         while 1:
             chat = raw_input()
             if chat != ":exit:":
