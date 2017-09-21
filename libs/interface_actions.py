@@ -16,7 +16,7 @@ def InitMon(interface):
     else:
         intfmon = 'mon' + interface[-1]
         if os.path.isdir("/sys/class/net/" + intfmon):
-            logger.debug('DEBUG', 33, "WiFi interface %s exists! Deleting it!" % (intfmon))
+            logger.debug("WiFi interface %s exists! Deleting it!" % (intfmon))
             try:
                 os.system("iw dev %s del" % intfmon)
                 time.sleep(0.3)
