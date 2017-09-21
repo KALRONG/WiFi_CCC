@@ -42,6 +42,12 @@ def main():
         cleanexit(histfile)
 
 if __name__ == "__main__":
+    import libs.log as log
+    import libs.config as config
+
+    log.init_logging()
+    config.init_config()
+    log.config_log(config.conf)
     main()
 
 
