@@ -162,10 +162,9 @@ def PacketProcessSend(chat):
     from configuration import verbose, pcount, username, userlist
     global sc,histfile
     user=username.strip()
+    print user
     command = chat[:6]
-    print command
     message = chat[6:]
-    print message
 
     if command == ':chat:':
         encrypted = encrypt(user,command,message)
