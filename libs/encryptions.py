@@ -29,7 +29,6 @@ def encrypt(user, command, message):
 
 ## decrypt: function to decrypt received packet fields and return them as a list
 def decrypt(user,command,message,payload):
-    from configuration import cipher_decrypt as cipher
     try:
         dec_user = cipher.decrypt(base64.b64decode(user)).strip()
         dec_command = cipher.decrypt(base64.b64decode(command)).strip()
