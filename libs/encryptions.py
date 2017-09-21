@@ -36,7 +36,7 @@ def decrypt(user,command,message,payload):
     from configuration import cipher
     try:
         print user
-        print base64.b16decode(user)
+        print base64.b64decode(user)
         print cipher.decrypt(base64.b64decode(user))
         dec_user = cipher.decrypt(base64.b64decode(user)).strip()
         dec_command = cipher.decrypt(base64.b64decode(command)).strip()
