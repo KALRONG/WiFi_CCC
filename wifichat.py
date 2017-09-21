@@ -4,10 +4,8 @@
 import logging, os, sys
 from threading import Thread
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-from libs.configuration import init_config
 
 def main():
-    init_config()
     from libs.utils import banner, utilization, cleanexit
     from libs.configuration import username, conf, create_cipher
     banner()
