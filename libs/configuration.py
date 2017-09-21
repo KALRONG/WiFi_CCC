@@ -100,6 +100,7 @@ def configuration_parser(config_file):
         log.critical_errors("No debug level found in config file.")
     else:
         verbose = int(config["general"]["debug"])
+    log.config_log(config)
     if config.has_option("general","interface"):
         if config["general"]["interface"][:4] == 'wlan' or config["general"]["interface"][:3] == 'mon' or config["general"]["interface"][:2] == 'wl':
             intfmon = str(config["general"]["interface"])

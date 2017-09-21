@@ -45,7 +45,6 @@ if __name__ == "__main__":
 
     log.init_logging()
     config.init_config()
-    log.config_log(config.conf)
     main()
 
 
