@@ -130,7 +130,6 @@ def configuration_parser(config_file):
 
 
 def init_config():
-    global conf
-    log.init_logging()
+    global conf)
     init_variables()
     conf = configuration_parser(argument_parser().config)
