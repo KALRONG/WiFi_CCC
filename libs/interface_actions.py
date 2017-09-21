@@ -89,11 +89,11 @@ def PacketHandler(pkt):
 
             if (ciphereduser + psc) in configuration.lastpacketsc:
                 configuration.pktcountpbd += 1
-                if verbose > 1: print "Packet discarded (%s): %s" % (psc, ciphereduser)
+                logger.info("Packet discarded (%s): %s" % (psc, ciphereduser))
                 return  ## silently discard packet, processed before
 
-            if verbose > 1: print "Received ENC (%s): %s,%s,%s,%s" % (
-            psc, ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload)
+            logger.info("Received ENC (%s): %s,%s,%s,%s" % (
+            psc, ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload))
 
             decrypted = decrypt(ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload)
             decrypteduser = decrypted[0]
@@ -101,9 +101,9 @@ def PacketHandler(pkt):
             decryptedmessage = decrypted[3]
             decryptedpayload = decrypted[4]
             decryptedok = decrypted[5]  ## last field is checksum
-            if verbose > 1: print decrypted
-            if verbose > 1: print "Received DEC (%s): %s,%s,%s,%s" % (
-            psc, decrypteduser, decryptedcommand, decryptedmessage, decryptedpayload)
+            logger.info(decrypted)
+            logger.info("Received DEC (%s): %s,%s,%s,%s" % (
+            psc, decrypteduser, decryptedcommand, decryptedmessage, decryptedpayload))
 
             if not decryptedok:
                 if verbose: print "Malformed packet received!"

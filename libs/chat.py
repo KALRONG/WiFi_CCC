@@ -1,6 +1,5 @@
-import textwrap, base64, subprocess
+import textwrap, base64
 from scapy.all import *
-from encryptions import decrypt
 
 
 ## chatcrypt: function to cut payload in max size parts, cipher and encode each part
