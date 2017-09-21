@@ -163,7 +163,9 @@ def PacketProcessSend(chat):
     global sc,histfile
     user=username.strip()
     command = chat[:6]
+    print command
     message = chat[6:]
+    print message
 
     if command == ':chat:':
         encrypted = encrypt(user,command,message)
