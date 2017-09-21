@@ -69,7 +69,7 @@ def init_variables():
 def create_cipher():
     from utils import channel_password
     global cipher
-    cipher = AES.new(channel_password(), AES.MODE_ECB)
+    cipher = AES.new(channel_password(), AES.MODE_OPENPGP)
 
 def argument_parser():
     parser = argparse.ArgumentParser()
