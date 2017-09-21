@@ -89,10 +89,10 @@ def PacketHandler(pkt):
 
             if (ciphereduser + psc) in configuration.lastpacketsc:
                 configuration.pktcountpbd += 1
-                logger.info("Packet discarded (%s): %s" % (psc, ciphereduser))
+                logger.debug("Packet discarded (%s): %s" % (psc, ciphereduser))
                 return  ## silently discard packet, processed before
 
-            logger.info("Received ENC (%s): %s,%s,%s,%s" % (
+            logger.debug("Received ENC (%s): %s,%s,%s,%s" % (
             psc, ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload))
 
             decrypted = decrypt(ciphereduser, cipheredcommand, cipheredmessage, cipheredpayload)
@@ -101,8 +101,8 @@ def PacketHandler(pkt):
             decryptedmessage = decrypted[3]
             decryptedpayload = decrypted[4]
             decryptedok = decrypted[5]  ## last field is checksum
-            logger.info(decrypted)
-            logger.info("Received DEC (%s): %s,%s,%s,%s" % (
+            logger.debug(decrypted)
+            logger.debug("Received DEC (%s): %s,%s,%s,%s" % (
             psc, decrypteduser, decryptedcommand, decryptedmessage, decryptedpayload))
 
             if not decryptedok:
