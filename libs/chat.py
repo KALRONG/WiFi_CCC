@@ -18,6 +18,7 @@ def chatcrypt(payload, chunksize):
         if lastpadd > 0: part = part + (' ' * (16 - lastpadd))
         encoded_part = base64.b64encode(cipher.encrypt(part))
         encoded_parts.add(encoded_part)
+    print encoded_parts
     return encoded_parts
 
 
