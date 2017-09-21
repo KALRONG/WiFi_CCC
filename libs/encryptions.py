@@ -4,13 +4,10 @@ import base64
 ## encrypt: function to base64 encode and encrypt user, command and message
 def encrypt(user, command, message):
     from configuration import cipher, maxpayload
-
+    user=str(user)
     # Cipher and encode user
-    print user
     padd = len(user) % 16
     if padd > 0: user = user + (' ' * (16 - padd))
-    print user
-    print cipher.encrypt(user)
     encoded_user = base64.b64encode(cipher.encrypt(user))
     print encoded_user
 
@@ -35,9 +32,6 @@ def encrypt(user, command, message):
 def decrypt(user,command,message,payload):
     from configuration import cipher
     try:
-        print user
-        print base64.b64decode(user)
-        print cipher.decrypt(base64.b64decode(user))
         dec_user = cipher.decrypt(base64.b64decode(user)).strip()
         dec_command = cipher.decrypt(base64.b64decode(command)).strip()
         dec_message = cipher.decrypt(base64.b64decode(message)).strip()
