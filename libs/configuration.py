@@ -70,7 +70,7 @@ def create_cipher():
     from utils import channel_password
     global cipher
     iv = b"1234567890123456"
-    cipher = AES.new(channel_password(), AES.MODE_ECB)
+    cipher = AES.new(channel_password(), AES.MODE_CTR)
 
 def argument_parser():
     parser = argparse.ArgumentParser()
