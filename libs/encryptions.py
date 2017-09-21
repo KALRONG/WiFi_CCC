@@ -6,18 +6,18 @@ def encrypt(user, command, message):
     from configuration import cipher, maxpayload
 
     # Cipher and encode user
-    padd = len(user) % 16
-    if padd > 0: user = user + (' ' * (16 - padd))
+    #padd = len(user) % 16
+    #if padd > 0: user = user + (' ' * (16 - padd))
     encoded_user = base64.b64encode(cipher.encrypt(user))
 
     # Cipher and encode command
-    padd = len(command) % 16
-    if padd > 0: command = command + (' ' * (16 - padd))
+    #padd = len(command) % 16
+    #if padd > 0: command = command + (' ' * (16 - padd))
     encoded_command = base64.b64encode(cipher.encrypt(command))
 
     # Cipher and encode message
-    padd = len(message) % 16
-    if padd > 0: message = message + (' ' * (16 - padd))
+    #padd = len(message) % 16
+    #if padd > 0: message = message + (' ' * (16 - padd))
     encoded_message = base64.b64encode(cipher.encrypt(message))
 
     # Calculate total packet length
