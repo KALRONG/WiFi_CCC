@@ -6,10 +6,12 @@ def encrypt(user, command, message):
     from configuration import cipher, maxpayload
 
     # Cipher and encode user
+    print user
     padd = len(user) % 16
     if padd > 0: user = user + (' ' * (16 - padd))
-    cipher.encrypt(user)
+    print user
     encoded_user = base64.b64encode(cipher.encrypt(user))
+    print encoded_user
 
     # Cipher and encode command
     padd = len(command) % 16
