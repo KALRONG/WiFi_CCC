@@ -10,8 +10,6 @@ def main():
     init_config()
     from libs.utils import banner, utilization, cleanexit
     from libs.configuration import username, conf, create_cipher
-    import libs.log as log
-    log.init_logging()
     banner()
     if conf["general"]["history"]:
         try:
