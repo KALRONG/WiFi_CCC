@@ -71,7 +71,7 @@ def create_cipher():
     global cipher
     iv = b"1234567890123456"
     password = channel_password()
-    cipher = AES.new(password, AES.MODE_CBC, iv)
+    cipher = AES.new(password, AES.MODE_OPENPGP, iv)
 
 def argument_parser():
     parser = argparse.ArgumentParser()
