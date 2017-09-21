@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-​
 import base64
 
 
@@ -11,7 +12,6 @@ def encrypt(user, command, message):
     padd = len(user) % 16
     if padd > 0: user = user + (' ' * (16 - padd))
     encoded_user = base64.b64encode(cipher.encrypt(user))
-    print encoded_user
 
     # Cipher and encode command
     padd = len(command) % 16

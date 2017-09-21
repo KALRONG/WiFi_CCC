@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-​
 import textwrap, base64
 from scapy.all import *
 

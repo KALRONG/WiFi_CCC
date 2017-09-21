@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-​
 import argparse, time
 import configparser
 import logging
