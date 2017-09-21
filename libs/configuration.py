@@ -72,7 +72,7 @@ def create_cipher():
     global cipher, cipher_decrypt
     iv = b"1234567890123456"
     cipher = AES.new(channel_password(), AES.MODE_OPENPGP, iv)
-    eiv = cipher.encrypt(b(""))
+    eiv = cipher.encrypt(b"")
     cipher_decrypt = AES.new(channel_password(), AES.MODE_OPENPGP, eiv)
 
 def argument_parser():
