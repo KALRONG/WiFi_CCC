@@ -117,7 +117,7 @@ def configuration_parser(config_file):
         nick_selection()
     else:
         print "Using nickname: %s" % config["general"]["username"]
-        username = config["general"]["username"]
+        username = str(config["general"]["username"])
     if not config.has_option("general", "channel"):
         privateirc, privateircname = channel_selection()
     else:
