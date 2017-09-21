@@ -10,6 +10,7 @@ def encrypt(user, command, message):
     padd = len(user) % 16
     if padd > 0: user = user + (' ' * (16 - padd))
     print user
+    print cipher.encrypt(user)
     encoded_user = base64.b64encode(cipher.encrypt(user))
     print encoded_user
 
