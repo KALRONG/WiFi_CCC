@@ -25,6 +25,7 @@ def InitMon(interface):
                 os.kill(os.getpid(), SIGINT)
                 return False
         try:
+            logger.info("Creating monitor interface using iw")
             # create monitor interface using iw
             os.system("iw dev %s interface add %s type monitor" % (interface, intfmon))
             time.sleep(0.2)
