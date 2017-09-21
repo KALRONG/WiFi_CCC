@@ -162,7 +162,6 @@ def PacketProcessSend(chat):
     from configuration import verbose, pcount, username, userlist
     global sc,histfile
     user=username.strip()
-    print user
     command = chat[:6]
     message = chat[6:]
 
