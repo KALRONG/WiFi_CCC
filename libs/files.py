@@ -17,6 +17,7 @@ def filecrypt(filename, chunksize):
         parts = textwrap.wrap(fileContent, chunksize-len(str(num_parts)), break_on_hyphens=False)
         encoded_parts=set()
         count = 0
+        encoded_parts.add(base64.b64encode(cipher.encrypt("%s:%s" % (filename, num_parts))))
         for part in parts:
             part = "%s:%s" % (count, part)
             lastpadd = len(part) % 16
