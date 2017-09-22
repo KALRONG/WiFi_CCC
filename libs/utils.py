@@ -41,6 +41,16 @@ def cleanexit(histfile):
         pass
     exit()
 
+def join_channel():
+    from interface_actions import PacketProcessSend
+    from configuration import username, privateircname
+    try:
+        PacketProcessSend(":chat:%s join the chat room: %s!" %(username, privateircname)) ## User joins group
+    except:
+        print "bye!"
+        pass
+
+
 def banner():
     print "======================================================="
     print "      ▌ ▌▗   ▛▀▘▗     ▞▀▖       ▞▀▖        ▞▀▖   "

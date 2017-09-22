@@ -6,8 +6,8 @@ from threading import Thread
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 
 def main():
-    from libs.utils import banner, utilization, cleanexit
-    from libs.configuration import username, conf, create_cipher
+    from libs.utils import banner, utilization, cleanexit, join_channel
+    from libs.configuration import conf, create_cipher
     banner()
     if conf["general"]["history"]:
         try:
@@ -25,10 +25,10 @@ def main():
     sniffer.daemon = True
     sniffer.start()
     utilization()
-    from libs.configuration import privateircname
+    join_channel()
     try:
         #PacketProcessSend(":chat:%s joined the chat room: %s" % (username, privateircname))  ## User entering group
-        PacketProcessSend(":chat: %s left the chat room: %s!" % (str(username), str(privateircname)))  ## User lefts group
+        #PacketProcessSend(":chat: %s left the chat room: %s!" % (str(username), str(privateircname)))  ## User lefts group
         while 1:
             chat = raw_input()
             if chat != ":exit:":
