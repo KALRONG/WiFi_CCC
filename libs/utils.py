@@ -46,6 +46,7 @@ def join_channel():
     from configuration import username, privateircname
     try:
         PacketProcessSend(":chat:%s join the chat room: %s!" %(username, privateircname)) ## User joins group
+        PacketProcessSend(":chat:%s join the chat room: %s!" % (username, privateircname))
     except:
         print "bye!"
         pass
