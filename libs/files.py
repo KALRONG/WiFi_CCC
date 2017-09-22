@@ -13,11 +13,13 @@ def filecrypt(filename, chunksize):
         return ''
     try:
         from configuration import cipher
-        num_parts = len(textwrap.wrap(fileContent, chunksize, break_on_hyphens=False))
-        parts = textwrap.wrap(fileContent, chunksize-len(str(num_parts)), break_on_hyphens=False)
+        num_parts = str(len(textwrap.wrap(fileContent, chunksize, break_on_hyphens=False)))
+        parts = textwrap.wrap(fileContent, chunksize-len(num_parts), break_on_hyphens=False)
         encoded_parts=set()
         count = 0
-        encoded_parts.add("test")
+        if len(num_parts) % 16 > 0:
+            num_parts = num_parts+ ("~" * (16 - (len(num_parts)%16)))
+        encoded_parts.add(base64.b64encode(cipher.encrypt("%s" % num_parts)))
         for part in parts:
             part = "%s:%s" % (str(count), part)
             lastpadd = len(part) % 16
