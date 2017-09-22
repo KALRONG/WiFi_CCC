@@ -14,7 +14,7 @@ def filecrypt(filename, chunksize):
     try:
         from configuration import cipher
         num_parts = len(textwrap.wrap(fileContent, chunksize, break_on_hyphens=False))
-        parts = textwrap.wrap(fileContent, chunksize-len(num_parts), break_on_hyphens=False)
+        parts = textwrap.wrap(fileContent, chunksize-len(str(num_parts)), break_on_hyphens=False)
         encoded_parts=set()
         count = 0
         for part in parts:
