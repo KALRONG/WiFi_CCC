@@ -73,6 +73,7 @@ def create_cipher():
     iv = b"1234567890123456"
     password = channel_password()
     cipher = AES.new(password, AES.MODE_OPENPGP, iv)
+    cipher.encrypt(iv)
 
 def argument_parser():
     parser = argparse.ArgumentParser()
