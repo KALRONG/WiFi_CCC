@@ -22,8 +22,6 @@ def filecrypt(filename, chunksize):
         print parts
         encoded_parts=set()
         count = 1
-        if len(num_parts) % 16 > 0:
-            num_parts = num_parts+ ("~" * (16 - (len(num_parts)%16)))
         encoded_parts.add(base64.b64encode(cipher.encrypt("Parts: %s" % num_parts)))
         for part in parts:
             logger.debug("Part %s(%s): %s" % (count,len(part), part))
