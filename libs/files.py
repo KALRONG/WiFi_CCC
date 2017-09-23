@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-​
+import logging
+logger = logging.getLogger(__name__)
 import textwrap, base64
 
 
@@ -14,12 +16,14 @@ def filecrypt(filename, chunksize):
     try:
         from configuration import cipher
         num_parts = str(len(textwrap.wrap(fileContent, chunksize, break_on_hyphens=False)))
+        logger.debug("Number of parts: %s" % num_parts)
         parts = textwrap.wrap(fileContent, chunksize-len(num_parts), break_on_hyphens=False)
+        logger.debug("Parts: %s" % parts)
         encoded_parts=set()
         count = 0
         if len(num_parts) % 16 > 0:
             num_parts = num_parts+ ("~" * (16 - (len(num_parts)%16)))
-        encoded_parts.add(base64.b64encode(cipher.encrypt("%s" % num_parts)))
+        encoded_parts.add(base64.b64encode(cipher.encrypt("Parts: %s" % num_parts)))
         for part in parts:
             part = "%s:%s" % (count, part)
             lastpadd = len(part) % 16
