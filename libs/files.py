@@ -19,7 +19,7 @@ def filecrypt(filename, chunksize):
         logger.debug("Number of parts: %s" % num_parts)
         logger.debug("Chunksize: %s" % (chunksize - len(num_parts) - 1))
         parts = textwrap.wrap(fileContent, chunksize-len(num_parts) - 1, break_on_hyphens=False)
-        logger.debug("Parts: %s" % parts)
+        print parts
         encoded_parts=set()
         count = 0
         if len(num_parts) % 16 > 0:
