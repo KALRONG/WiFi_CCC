@@ -32,8 +32,8 @@ def filecrypt(filename, chunksize):
             lastpadd = len(part) % 16
             if lastpadd > 0:
                 part = part + ("~" * (16 - lastpadd))
-                encoded_part = base64.b64encode(cipher.encrypt(part))
-                encoded_parts.add(encoded_part)
+            encoded_part = base64.b64encode(cipher.encrypt(part))
+            encoded_parts.add(encoded_part)
             count += 1
         return encoded_parts
     except Exception as e:
