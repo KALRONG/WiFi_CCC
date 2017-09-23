@@ -25,7 +25,7 @@ def filecrypt(filename, chunksize):
         logger.debug("Part start(%s): %s" % (len("Parts: %s" % num_parts), "Parts: %s" % num_parts))
         for part in parts:
             logger.debug("Part %s(%s): %s" % (count,len(part), part))
-            part = str("%s:%s" % (count, part))
+            part = "%s:%s" % (count, part)
             logger.debug("Part %s(%s): %s" % (count,len(part), part))
             lastpadd = len(part) % 16
             if lastpadd > 0:
