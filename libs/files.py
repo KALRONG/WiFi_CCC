@@ -17,6 +17,7 @@ def filecrypt(filename, chunksize):
         from configuration import cipher
         num_parts = str(len(textwrap.wrap(fileContent, chunksize, break_on_hyphens=False)))
         logger.debug("Number of parts: %s" % num_parts)
+        logger.debug("Chunksize: %s" % (chunksize - len(num_parts)))
         parts = textwrap.wrap(fileContent, chunksize-len(num_parts), break_on_hyphens=False)
         logger.debug("Parts: %s" % parts)
         encoded_parts=set()
