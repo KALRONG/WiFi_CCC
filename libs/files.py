@@ -24,13 +24,13 @@ def filecrypt(filename, chunksize):
         encoded_parts.add(base64.b64encode(cipher.encrypt("Parts: %s" % num_parts)))
         logger.debug("Part start(%s): %s" % (len("Parts: %s" % num_parts), "Parts: %s" % num_parts))
         for part in parts:
-            logger.debug("Part %s(%s): %s" % (count,len(part), part))
             part = "%s:%s" % (count, part)
-            logger.debug("Part %s(%s): %s" % (count,len(part), part))
             lastpadd = len(part) % 16
             if lastpadd > 0:
                 part = part + ("~" * (16 - lastpadd))
+            logger.debug("Part %s(%s): %s" % (count, len(part), part))
             encoded_part = base64.b64encode(cipher.encrypt(part))
+            logger.debug("Part %s(%s): %s" % (count, len(part), part))
             encoded_parts.add(encoded_part)
             count += 1
         return encoded_parts
