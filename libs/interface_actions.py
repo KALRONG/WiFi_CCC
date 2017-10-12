@@ -240,6 +240,7 @@ def PacketSend(encrypted,payload):
         # pkt.show()
 
         try:
+            print pkt
             sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
             if verbose > 1: print "Packet sent (%s): %s,%s,%s,%s,%s" % (sc, user, uuidsc, command, message, payload)
             configuration.pktcounts += 1
