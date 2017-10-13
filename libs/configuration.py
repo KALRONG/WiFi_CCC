@@ -33,6 +33,7 @@ global pcount
 global cipher
 global intfmon
 global uuid
+global raspberry
 
 def init_variables():
     global maxpayload
@@ -52,6 +53,7 @@ def init_variables():
     global privateircname
     global privateirc
     global remote
+    global raspberry
     maxpayload=258
     sc=randint(1,1024)
     lastpacketsc=[]
@@ -66,6 +68,7 @@ def init_variables():
     pingsc=[]
     broadcast='ff:ff:ff:ff:ff:ff'
     remote = []
+    raspberry = "0"
 
 def create_cipher():
     from utils import channel_password
@@ -83,7 +86,6 @@ def argument_parser():
 
 
 def configuration_parser(config_file):
-    from interface_actions import InitMon
     global username
     global privateircname
     global privateirc
@@ -114,6 +116,9 @@ def configuration_parser(config_file):
     else:
         intfmon = str(raw_input("Enter your Wi-Fi interface: "))
     if intfmon == '': intfmon = str(config["general"]["interface"])
+    if config.has_option("general","raspberry"):
+        raspberry = config["general"]["raspberry"]
+    from interface_actions import InitMon
     if not InitMon(intfmon): exit(-1)
     if not config.has_option("general", "username"):
         nick_selection()

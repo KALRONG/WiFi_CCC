@@ -10,7 +10,10 @@ from chat import chatcrypt, cmdcrypt
 
 ## InitMon: function to initialize monitor mode vif
 def InitMon(interface):
-    from configuration import verbose, intfmon
+    from configuration import verbose, intfmon, raspberry
+    if raspberry == "1":
+        logging.info("Raspberry option selected, skipping setting monitor mode")
+        return True
     if not os.path.isdir("/sys/class/net/" + interface):
         logger.error("WiFi parent interface %s does not exist! Cannot continue!" %interface)
         return False
