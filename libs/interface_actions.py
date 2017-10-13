@@ -241,7 +241,7 @@ def PacketSend(encrypted,payload):
         pkt.SC = configuration.sc    ## Update sequence number
         lastpacketsc.append(user+str(configuration.sc))   ## Save this packet to not repeat showing it
         # pkt.show()
-
+	print intfmon
         try:
             sendp(pkt, iface=intfmon, verbose=0, count=pcount)  ## Send packet several times
             if verbose > 1: print "Packet sent (%s): %s,%s,%s,%s,%s" % (sc, user, uuidsc, command, message, payload)
